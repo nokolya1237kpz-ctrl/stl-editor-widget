@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>🛠️ STL Мастер</title>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #edeef0; color: #1a1a1a; padding: 12px; }
+        .container { max-width: 480px; margin: 0 auto; }
+        .card { background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h2 { font-size: 18px; margin-bottom: 12px; color: #2c3e50; }
+        label { display: block; font-weight: 600; font-size: 14px; margin: 10px 0 4px; color: #2c3e50; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #d0d3d6; border-radius: 10px; font-size: 15px; background: #fff; margin-bottom: 8px; }
+        button { background: #4a76a8; color: white; border: none; border-radius: 10px; padding: 12px; width: 100%; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 10px; }
+        button:active { opacity: 0.9; }
+        .file-drop { background: #f5f7fa; border: 2px dashed #4a76a8; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; margin-bottom: 12px; }
+        .viewer { width: 100%; height: 280px; background: #1a1a1a; border-radius: 12px; margin: 12px 0; }
+        .status { background: #e8f0fe; border-left: 4px solid #4a76a8; padding: 10px; border-radius: 8px; font-size: 13px; margin-top: 10px; }
+        .hidden { display: none !important; }
+        .row { display: flex; gap: 10px; }
+        .row > div { flex: 1; }
+        @media (prefers-color-scheme: dark) {
+            body { background: #19191a; color: #e1e3e6; }
+            .card { background: #222224; }
+            input, select { background: #2d2d2f; border-color: #444; color: #e1e3e6; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header style="text-align:center; margin-bottom:16px;">
+        <h1>🛠️ STL Мастер</h1>
+        <p style="color:#6c757d; font-size:14px;">Редактор и генератор 3D-моделей</p>
+    </header>
+
+    <!-- Вкладки -->
+    <div style="display:flex; gap:8px; margin-bottom:16px;">
+        <button id="tab-editor" class="tab-btn active" onclick="switchTab('editor')">✂️ Редактор</button>
+        <button id="tab-keychain" class="tab-btn" onclick="switchTab('keychain')">🔑 Брелок</button>
+    </div>
+
+    <!-- ВКЛАДКА 1: РЕДАКТОР -->
+    <div id="panel-editor" class="card tab-panel active">
+        <h2>✂️ Редактировать STL</h2>
+        <div class="file-drop" id="fileDrop">📁 Нажми или перетащи STL файл
+            <input type="file" id="stlFile" accept=".stl" hidden>
+        </div>
+        <div id="editorControls" class="hidden">
+            <label>Действие:</label>
+            <select id="action" onchange="toggleParams()">
+                <option value="add_text">📝 Добавить текст</option>
+                <option value="cut_hole">🕳️ Вырезать отверстие</option>
+            </select>
+            <div id="params-text">
+                <label>Текст</label><input type="text" id="editText" value="VK">
+                <label>Размер шрифта (мм)</label><input type="number" id="fontSize" value="10" min="4" max="20">
+                <label>Глубина (мм)</label><input type="number" id="textDepth" value="1" step="0.1" min="0.2" max="3">
+            </div>
+            <div id="params-hole" class="hidden">
+                <label>Радиус отверстия (мм)</label><input type="number" id="holeRadius" value="3" step="0.5" min="1" max="10">
+                <label>Глубина (0 = сквозное)</label><input type="number" id="holeDepth" value="0" min="0" max="50">
+            </div>
+            <button id="btnProcess" onclick="processSTL()">⚡ Применить</button>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА 2: ГЕНЕРАТОР БРЕЛКОВ -->
+    <div id="panel-keychain" class="card tab-panel hidden">
+        <h2>🔑 Создать брелок</h2>
+        <label>Текст на брелке</label><input type="text" id="keyText" value="MAX" maxlength="12">
+        <div class="row">
+            <div><label>Ширина (мм)</label><input type="number" id="keyWidth" value="50" min="30" max="80"></div>
+            <div><label>Высота (мм)</label><input type="number" id="keyHeight" value="30" min="20" max="60"></div>
+        </div>
+        <div class="row">
+            <div><label>Толщина (мм)</label><input type="number" id="keyThick" value="3" min="2" max="6" step="0.5"></div>
+            <div><label>Размер текста</label><input type="number" id="keyFontSize" value="10" min="4" max="16"></div>
+        </div>
+        <label>Режим текста</label>
+        <select id="textMode">
+            <option value="cut">Вырезанный (углубление)</option>
+            <option value="emboss">Выпуклый (рельеф)</option>
+        </select>
+        <button id="btnGenerate" onclick="generateKeychain()">🖨️ Сгенерировать</button>
+    </div>
+
+    <!-- 3D ПРОСМОТР -->
+    <div class="card">
+        <h2>📦 3D Просмотр</h2>
+        <div id="viewer" class="viewer"></div>
+        <div id="status" class="status hidden">Готов к работе</div>
+        <button id="btnDownload" class="hidden" onclick="downloadSTL()">💾 Скачать STL</button>
+    </div>
+</div>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
