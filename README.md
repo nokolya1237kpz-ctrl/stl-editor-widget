@@ -7,7 +7,7 @@
 
 ## 🔗 Демо
 
-👉 [Открыть Mini App во ВКонтакте](https://vk.com/app<APP_ID>)
+👉 [Открыть Mini App во ВКонтакте](https://vk.com/app54580452)
 
 ## ✨ Возможности
 
