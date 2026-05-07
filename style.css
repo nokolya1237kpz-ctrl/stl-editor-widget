@@ -1,197 +1,284 @@
+/* ==========================================================================
+   🎨 НОРМАЛЬНЫЙ UI БЕЗ УЖАСНОГО VK-СТИЛЯ
+   ========================================================================== */
+
+:root{
+  --bg:#0f1115;
+  --card:#171a21;
+  --card2:#1e232d;
+  --border:#2a3140;
+  --text:#f3f5f7;
+  --muted:#9ba7b4;
+
+  --blue:#4f8cff;
+  --blueHover:#3a7cff;
+
+  --green:#21c36f;
+  --red:#ff5d73;
+  --orange:#ffb84d;
+
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
+}
+
+html,
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,sans-serif;
+  min-height:100%;
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:#f0f2f5;
-  color:#1a1a1a;
-  padding:12px;
-  line-height:1.4;
+  padding:20px;
 }
 
 .container{
-  max-width:480px;
+  width:100%;
+  max-width:1100px;
   margin:0 auto;
 }
 
-.community-link{
-  display:block;
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+header{
+  margin-bottom:24px;
   text-align:center;
-  margin-bottom:12px;
-  color:#4a76a8;
-  text-decoration:none;
-  font-weight:600;
-  font-size:14px;
-  padding:10px;
-  background:#e8f0fe;
-  border-radius:12px;
-  transition:0.2s;
-}
-
-.community-link:hover{
-  background:#d7e7fd;
-}
-
-.card{
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
-  margin-bottom:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.06);
 }
 
 h1{
-  font-size:22px;
-  margin-bottom:6px;
-}
-
-h2{
-  font-size:18px;
-  margin-bottom:12px;
-  color:#2c3e50;
+  font-size:34px;
+  font-weight:800;
+  margin-bottom:8px;
 }
 
 .subtitle{
-  color:#6c757d;
-  font-size:14px;
+  color:var(--muted);
+  font-size:15px;
 }
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:24px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow);
+}
+
+h2{
+  margin-bottom:16px;
+  font-size:22px;
+}
+
+/* ==========================================================================
+   INPUTS
+   ========================================================================== */
 
 label{
   display:block;
-  margin:12px 0 6px;
-  font-size:14px;
-  font-weight:600;
-}
-
-small.hint{
-  display:block;
-  color:#6c757d;
-  font-size:12px;
-  margin-top:2px;
   margin-bottom:8px;
+  margin-top:18px;
+  font-weight:600;
 }
 
 input,
 select{
   width:100%;
-  padding:12px;
-  border:1px solid #d0d3d6;
-  border-radius:12px;
-  background:#fff;
+  background:var(--card2);
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:14px;
+  padding:14px;
   font-size:15px;
-  margin-bottom:8px;
-  transition:0.2s;
 }
 
 input:focus,
 select:focus{
   outline:none;
-  border-color:#4a76a8;
-  box-shadow:0 0 0 3px rgba(74,118,168,0.12);
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(79,140,255,.18);
 }
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
 
 button{
   width:100%;
   border:none;
-  border-radius:14px;
+  border-radius:16px;
+  padding:16px;
+  margin-top:16px;
 
-  padding:15px 18px;
-
-  background:linear-gradient(135deg,#4a76a8,#35608f);
-
-  color:#fff;
+  background:var(--blue);
+  color:white;
 
   font-size:15px;
   font-weight:700;
 
   cursor:pointer;
-
-  transition:0.2s;
+  transition:.18s;
 }
 
 button:hover{
+  background:var(--blueHover);
   transform:translateY(-1px);
-  box-shadow:0 8px 24px rgba(74,118,168,0.35);
 }
 
-button:active{
-  transform:scale(0.98);
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 button.success{
-  background:linear-gradient(135deg,#2ea44f,#22863a);
+  background:var(--green);
 }
 
 button.danger{
-  background:linear-gradient(135deg,#e53935,#c62828);
+  background:var(--red);
 }
 
-.file-drop{
-  background:#f5f7fa;
-  border:2px dashed #4a76a8;
-  border-radius:14px;
-  padding:28px;
-  text-align:center;
-  cursor:pointer;
-  margin-bottom:16px;
-  transition:0.2s;
+/* ==========================================================================
+   TABS
+   ========================================================================== */
+
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
 }
 
-.file-drop:hover{
-  background:#e8f0fe;
+.tab-btn{
+  background:var(--card);
+  border:1px solid var(--border);
 }
+
+.tab-btn.active{
+  background:var(--blue);
+}
+
+/* ==========================================================================
+   VIEWER
+   ========================================================================== */
 
 .viewer{
   width:100%;
-  height:280px;
-  background:#1a1a1a;
-  border-radius:14px;
+  height:520px;
+
+  background:#0a0c10;
+  border-radius:24px;
   overflow:hidden;
-  position:relative;
-  margin-top:12px;
+
+  border:1px solid var(--border);
 }
+
+/* ==========================================================================
+   STATUS
+   ========================================================================== */
 
 .status{
   position:fixed;
+
   left:50%;
-  bottom:20px;
+  bottom:24px;
+
   transform:translateX(-50%);
-  width:calc(100% - 24px);
-  max-width:460px;
-  z-index:9999;
 
-  padding:14px 16px;
-  border-radius:14px;
+  width:min(92%,700px);
 
-  background:#202125;
-  color:#fff;
+  background:#1d2430;
+  border:1px solid var(--border);
 
-  font-size:14px;
-  font-weight:500;
+  padding:18px 22px;
+  border-radius:18px;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.35);
+  z-index:999999;
 
-  opacity:0;
-  pointer-events:none;
+  display:none;
 
-  transition:0.25s;
+  box-shadow:0 10px 40px rgba(0,0,0,.45);
 }
 
 .status.show{
-  opacity:1;
+  display:block;
 }
 
 .status.error{
-  background:#c62828;
-  color:#fff;
+  border-color:#ff5d73;
+  background:#2a1820;
 }
 
-.hidden{
-  display:none !important;
+/* ==========================================================================
+   FIX: ОКНО БОЛЬШЕ НЕ ЗАКРЫВАЕТ КНОПКУ
+   ========================================================================== */
+
+#btnDownload{
+  margin-bottom:90px;
 }
+
+/* ==========================================================================
+   DROPZONE
+   ========================================================================== */
+
+.file-drop{
+  background:var(--card2);
+  border:2px dashed var(--blue);
+
+  border-radius:22px;
+
+  padding:40px 20px;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  transition:.18s;
+}
+
+.file-drop:hover{
+  border-color:#7aa8ff;
+  background:#222a38;
+}
+
+/* ==========================================================================
+   CAD
+   ========================================================================== */
+
+.cad-object-card{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:16px;
+}
+
+.cad-object-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+
+.cad-object-title{
+  font-size:17px;
+  font-weight:700;
+}
+
+/* ==========================================================================
+   ROW
+   ========================================================================== */
 
 .row{
   display:flex;
@@ -202,162 +289,57 @@ button.danger{
   flex:1;
 }
 
-.tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:16px;
-}
-
-.tab-btn{
-  flex:1;
-  background:#e9edf2;
-  color:#1a1a1a;
-  margin:0;
-}
-
-.tab-btn.active{
-  background:#4a76a8;
-  color:#fff;
-}
+/* ==========================================================================
+   PREVIEW
+   ========================================================================== */
 
 .preview-img{
   width:100%;
-  max-height:220px;
-  object-fit:contain;
-  border-radius:12px;
-  border:1px solid #ddd;
-  margin-bottom:12px;
+  border-radius:18px;
+  margin-bottom:16px;
   display:none;
-  background:#fff;
 }
 
 .preview-img.show{
   display:block;
 }
 
-.card{
-  background:#ffffff;
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:18px;
+/* ==========================================================================
+   HIDDEN
+   ========================================================================== */
 
-  box-shadow:
-    0 4px 20px rgba(0,0,0,0.06),
-    0 1px 3px rgba(0,0,0,0.04);
+.hidden{
+  display:none !important;
 }
 
-.cad-object-card{
-  background:#f8f9fa;
-  border:1px solid #e0e0e0;
-  border-radius:12px;
-  padding:14px;
-  margin-bottom:14px;
-}
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
 
-.cad-object-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.cad-object-title{
-  font-size:14px;
-  font-weight:700;
-  color:#2c3e50;
-}
-
-footer{
-  text-align:center;
-  color:#6c757d;
-  font-size:12px;
-  margin:20px 0;
-}
-
-footer a{
-  color:#4a76a8;
-  text-decoration:none;
-}
-
-@media (prefers-color-scheme: dark){
+@media(max-width:720px){
 
   body{
-    background:#19191a;
-    color:#e1e3e6;
+    padding:14px;
   }
 
-  .card{
-    background:#222224;
+  .viewer{
+    height:340px;
   }
-
-  input,
-  select{
-    background:#2d2d2f;
-    border-color:#444;
-    color:#fff;
-  }
-
-  .file-drop{
-    background:#2a2a2c;
-    border-color:#5a8fc4;
-  }
-
-  .file-drop:hover{
-    background:#353537;
-  }
-
-  .community-link{
-    background:#2a3a5a;
-    color:#8dbef1;
-  }
-
-  .community-link:hover{
-    background:#354a6a;
-  }
-
-  .tab-btn{
-    background:#333;
-    color:#fff;
-  }
-
-  .tab-btn.active{
-    background:#5a8fc4;
-  }
-
-  .cad-object-card{
-    background:#2a2a2c;
-    border-color:#444;
-  }
-
-  .cad-object-title{
-    color:#fff;
-  }
-
-  .preview-img{
-    background:#2d2d2f;
-    border-color:#444;
-  }
-
-  small.hint,
-  .subtitle,
-  footer{
-    color:#aaa;
-  }
-}
-
-@media (max-width:360px){
 
   .tabs{
-    flex-wrap:wrap;
+    flex-direction:column;
   }
 
   .row{
     flex-direction:column;
-    gap:8px;
   }
 
-  .tab-btn{
-    font-size:13px;
-    padding:10px;
+  h1{
+    font-size:28px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:20px;
   }
 }
