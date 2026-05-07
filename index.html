@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>✂️ STL Мастер</title>
 
   <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
@@ -31,34 +31,32 @@
   </header>
 
   <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('editor')">
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" onclick="switchTab('editor')" role="tab" aria-selected="true" aria-controls="panel-editor">
       ✂️ Редактор
     </button>
 
-    <button class="tab-btn" onclick="switchTab('keychain')">
+    <button class="tab-btn" onclick="switchTab('keychain')" role="tab" aria-selected="false" aria-controls="panel-keychain">
       🔑 Брелок
     </button>
 
-    <button class="tab-btn" onclick="switchTab('cad')">
+    <button class="tab-btn" onclick="switchTab('cad')" role="tab" aria-selected="false" aria-controls="panel-cad">
       🧱 CAD
     </button>
   </div>
 
   <!-- EDITOR -->
-  <section id="panel-editor" class="card tab-panel">
-
+  <section id="panel-editor" class="card tab-panel" role="tabpanel" aria-labelledby="tab-editor">
     <h2>✂️ Редактирование STL</h2>
 
-    <div class="file-drop" id="fileDrop">
+    <div class="file-drop" id="fileDrop" role="button" tabindex="0">
       📁 Нажмите или перетащите STL сюда
       <input type="file" id="stlFile" accept=".stl" hidden>
     </div>
 
     <div id="editorControls" class="hidden">
 
-      <label>Действие</label>
-
+      <label for="action">Действие</label>
       <select id="action" onchange="toggleParams()">
         <option value="text">📝 Добавить текст</option>
         <option value="hole">🕳️ Вырезать отверстие</option>
@@ -68,58 +66,50 @@
 
       <!-- TEXT -->
       <div id="params-text">
+        <label for="editText">Текст</label>
+        <input type="text" id="editText" value="VK" maxlength="50">
 
-        <label>Текст</label>
-        <input type="text" id="editText" value="VK">
+        <label for="fontSize">Размер шрифта (мм)</label>
+        <input type="number" id="fontSize" value="8" min="4" max="16">
 
-        <label>Размер шрифта</label>
-        <input type="number" id="fontSize" value="8">
+        <label for="textDepth">Глубина (мм)</label>
+        <input type="number" id="textDepth" value="1" step="0.1" min="0.2" max="3">
 
-        <label>Глубина</label>
-        <input type="number" id="textDepth" value="1" step="0.1">
-
-        <label>Режим</label>
+        <label for="textMode">Режим</label>
         <select id="textMode">
           <option value="cut">🔻 Вырезанный</option>
           <option value="emboss">🔺 Выпуклый</option>
         </select>
-
       </div>
 
       <!-- HOLE -->
       <div id="params-hole" class="hidden">
+        <label for="holeRadius">Радиус отверстия (мм)</label>
+        <input type="number" id="holeRadius" value="2" step="0.5" min="1" max="15">
 
-        <label>Радиус отверстия</label>
-        <input type="number" id="holeRadius" value="2" step="0.5">
-
-        <label>Глубина</label>
-        <input type="number" id="holeDepth" value="0">
-
+        <label for="holeDepth">Глубина (0 = сквозное)</label>
+        <input type="number" id="holeDepth" value="0" min="0" max="100">
       </div>
 
       <!-- EYES -->
       <div id="params-eyes" class="hidden">
+        <label for="eyeRadius">Радиус глаза (мм)</label>
+        <input type="number" id="eyeRadius" value="2" min="1" max="8">
 
-        <label>Радиус глаза</label>
-        <input type="number" id="eyeRadius" value="2">
-
-        <label>Расстояние</label>
-        <input type="number" id="eyeDistance" value="10">
-
+        <label for="eyeDistance">Расстояние (мм)</label>
+        <input type="number" id="eyeDistance" value="10" min="5" max="40">
       </div>
 
       <!-- CUT -->
       <div id="params-cut_box" class="hidden">
+        <label for="cutX">Ширина (мм)</label>
+        <input type="number" id="cutX" value="5" min="1" max="50">
 
-        <label>Ширина</label>
-        <input type="number" id="cutX" value="5">
+        <label for="cutY">Высота (мм)</label>
+        <input type="number" id="cutY" value="5" min="1" max="50">
 
-        <label>Высота</label>
-        <input type="number" id="cutY" value="5">
-
-        <label>Глубина</label>
-        <input type="number" id="cutZ" value="5">
-
+        <label for="cutZ">Глубина (мм)</label>
+        <input type="number" id="cutZ" value="5" min="1" max="50">
       </div>
 
       <button id="btnProcess" onclick="processSTL()">
@@ -127,18 +117,16 @@
       </button>
 
     </div>
-
   </section>
 
   <!-- KEYCHAIN -->
-  <section id="panel-keychain" class="card tab-panel hidden">
-
+  <section id="panel-keychain" class="card tab-panel hidden" role="tabpanel" aria-labelledby="tab-keychain">
     <h2>🔑 Генератор брелков</h2>
 
-    <label>Текст</label>
-    <input type="text" id="keyText" value="VK">
+    <label for="keyText">Текст</label>
+    <input type="text" id="keyText" value="VK" maxlength="50">
 
-    <label>Форма</label>
+    <label for="keyShape">Форма</label>
     <select id="keyShape">
       <option value="rect">📦 Прямоугольник</option>
       <option value="round">🔵 Овал</option>
@@ -147,30 +135,27 @@
 
     <div class="row">
       <div>
-        <label>Ширина</label>
-        <input type="number" id="keyWidth" value="50">
+        <label for="keyWidth">Ширина (мм)</label>
+        <input type="number" id="keyWidth" value="50" min="30" max="80">
       </div>
-
       <div>
-        <label>Высота</label>
-        <input type="number" id="keyHeight" value="30">
+        <label for="keyHeight">Высота (мм)</label>
+        <input type="number" id="keyHeight" value="30" min="20" max="60">
       </div>
     </div>
 
     <div class="row">
       <div>
-        <label>Толщина</label>
-        <input type="number" id="keyThick" value="3">
+        <label for="keyThick">Толщина (мм)</label>
+        <input type="number" id="keyThick" value="3" min="2" max="6" step="0.5">
       </div>
-
       <div>
-        <label>Размер текста</label>
-        <input type="number" id="keyFontSize" value="10">
+        <label for="keyFontSize">Размер текста</label>
+        <input type="number" id="keyFontSize" value="10" min="4" max="16">
       </div>
     </div>
 
-    <label>Режим текста</label>
-
+    <label for="keyTextMode">Режим текста</label>
     <select id="keyTextMode">
       <option value="cut">🔻 Вырезанный</option>
       <option value="emboss">🔺 Выпуклый</option>
@@ -179,12 +164,10 @@
     <button id="btnGenerate" onclick="generateKeychain()">
       🖨️ Сгенерировать STL
     </button>
-
   </section>
 
   <!-- CAD -->
-  <section id="panel-cad" class="card tab-panel hidden">
-
+  <section id="panel-cad" class="card tab-panel hidden" role="tabpanel" aria-labelledby="tab-cad">
     <h2>🧱 CAD Конструктор</h2>
 
     <div id="cadObjects"></div>
@@ -196,26 +179,23 @@
     <button onclick="buildCadModel()">
       🖨️ Собрать STL
     </button>
-
   </section>
 
   <!-- VIEWER -->
   <section class="card">
-
     <h2>📦 3D Просмотр</h2>
 
-    <img id="previewImg" class="preview-img" alt="preview">
+    <img id="previewImg" class="preview-img" alt="2D Preview">
 
-    <div id="viewer" class="viewer"></div>
+    <div id="viewer" class="viewer" aria-label="3D модель"></div>
 
-    <div id="status" class="status">
+    <div id="status" class="status" role="status" aria-live="polite">
       ✅ Готово
     </div>
 
-    <button id="btnDownload" class="hidden" onclick="downloadSTL()">
+    <button id="btnDownload" class="hidden success" onclick="downloadSTL()">
       💾 Скачать STL
     </button>
-
   </section>
 
 </div>
