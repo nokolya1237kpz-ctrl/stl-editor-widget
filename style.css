@@ -1,0 +1,340 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:#f0f2f5;
+  color:#1a1a1a;
+  padding:12px;
+  line-height:1.4;
+}
+
+.container{
+  max-width:480px;
+  margin:0 auto;
+}
+
+.community-link{
+  display:block;
+  text-align:center;
+  margin-bottom:12px;
+  color:#4a76a8;
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+  padding:10px;
+  background:#e8f0fe;
+  border-radius:12px;
+  transition:0.2s;
+}
+
+.community-link:hover{
+  background:#d7e7fd;
+}
+
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+
+h1{
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+h2{
+  font-size:18px;
+  margin-bottom:12px;
+  color:#2c3e50;
+}
+
+.subtitle{
+  color:#6c757d;
+  font-size:14px;
+}
+
+label{
+  display:block;
+  margin:12px 0 6px;
+  font-size:14px;
+  font-weight:600;
+}
+
+small.hint{
+  display:block;
+  color:#6c757d;
+  font-size:12px;
+  margin-top:2px;
+  margin-bottom:8px;
+}
+
+input,
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid #d0d3d6;
+  border-radius:12px;
+  background:#fff;
+  font-size:15px;
+  margin-bottom:8px;
+  transition:0.2s;
+}
+
+input:focus,
+select:focus{
+  outline:none;
+  border-color:#4a76a8;
+  box-shadow:0 0 0 3px rgba(74,118,168,0.12);
+}
+
+button{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:14px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+  background:#4a76a8;
+  color:#fff;
+  transition:0.2s;
+}
+
+button:hover{
+  opacity:0.95;
+}
+
+button:active{
+  transform:scale(0.99);
+}
+
+button:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+button.success{
+  background:#28a745;
+}
+
+button.secondary{
+  background:#6c757d;
+}
+
+button.danger{
+  background:#dc3545;
+}
+
+.file-drop{
+  background:#f5f7fa;
+  border:2px dashed #4a76a8;
+  border-radius:14px;
+  padding:28px;
+  text-align:center;
+  cursor:pointer;
+  margin-bottom:16px;
+  transition:0.2s;
+}
+
+.file-drop:hover{
+  background:#e8f0fe;
+}
+
+.viewer{
+  width:100%;
+  height:280px;
+  background:#1a1a1a;
+  border-radius:14px;
+  overflow:hidden;
+  position:relative;
+  margin-top:12px;
+}
+
+.status{
+  margin-top:14px;
+  padding:12px;
+  border-radius:10px;
+  background:#e8f0fe;
+  border-left:4px solid #4a76a8;
+  font-size:14px;
+  display:none;
+}
+
+.status.show{
+  display:block;
+}
+
+.status.error{
+  background:#ffebee;
+  border-left-color:#dc3545;
+  color:#c62828;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.row{
+  display:flex;
+  gap:12px;
+}
+
+.row > div{
+  flex:1;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.tab-btn{
+  flex:1;
+  background:#e9edf2;
+  color:#1a1a1a;
+  margin:0;
+}
+
+.tab-btn.active{
+  background:#4a76a8;
+  color:#fff;
+}
+
+.preview-img{
+  width:100%;
+  max-height:220px;
+  object-fit:contain;
+  border-radius:12px;
+  border:1px solid #ddd;
+  margin-bottom:12px;
+  display:none;
+  background:#fff;
+}
+
+.preview-img.show{
+  display:block;
+}
+
+.cad-object-card{
+  background:#f8f9fa;
+  border:1px solid #e0e0e0;
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:14px;
+}
+
+.cad-object-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.cad-object-title{
+  font-size:14px;
+  font-weight:700;
+  color:#2c3e50;
+}
+
+footer{
+  text-align:center;
+  color:#6c757d;
+  font-size:12px;
+  margin:20px 0;
+}
+
+footer a{
+  color:#4a76a8;
+  text-decoration:none;
+}
+
+@media (prefers-color-scheme: dark){
+
+  body{
+    background:#19191a;
+    color:#e1e3e6;
+  }
+
+  .card{
+    background:#222224;
+  }
+
+  input,
+  select{
+    background:#2d2d2f;
+    border-color:#444;
+    color:#fff;
+  }
+
+  .file-drop{
+    background:#2a2a2c;
+    border-color:#5a8fc4;
+  }
+
+  .file-drop:hover{
+    background:#353537;
+  }
+
+  .community-link{
+    background:#2a3a5a;
+    color:#8dbef1;
+  }
+
+  .community-link:hover{
+    background:#354a6a;
+  }
+
+  .tab-btn{
+    background:#333;
+    color:#fff;
+  }
+
+  .tab-btn.active{
+    background:#5a8fc4;
+  }
+
+  .cad-object-card{
+    background:#2a2a2c;
+    border-color:#444;
+  }
+
+  .cad-object-title{
+    color:#fff;
+  }
+
+  .preview-img{
+    background:#2d2d2f;
+    border-color:#444;
+  }
+
+  small.hint,
+  .subtitle,
+  footer{
+    color:#aaa;
+  }
+}
+
+@media (max-width:360px){
+
+  .tabs{
+    flex-wrap:wrap;
+  }
+
+  .row{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .tab-btn{
+    font-size:13px;
+    padding:10px;
+  }
+}
