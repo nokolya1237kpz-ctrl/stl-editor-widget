@@ -53,6 +53,30 @@ header{
   text-align:center;
 }
 
+.community-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  max-width:100%;
+  margin:0 auto 14px;
+  padding:10px 14px;
+  color:#dce8ff;
+  background:rgba(79,140,255,.12);
+  border:1px solid rgba(79,140,255,.32);
+  border-radius:14px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.25;
+  white-space:normal;
+}
+
+.community-link:hover{
+  background:rgba(79,140,255,.2);
+  transform:translateY(-1px);
+}
+
 h1{
   font-size:34px;
   font-weight:800;
@@ -102,6 +126,12 @@ select{
   border-radius:14px;
   padding:14px;
   font-size:15px;
+}
+
+input[type="range"]{
+  padding:0;
+  height:34px;
+  accent-color:var(--blue);
 }
 
 input:focus,
@@ -287,6 +317,20 @@ button.danger{
 
 .row > div{
   flex:1;
+}
+
+.control-row{
+  margin-top:18px;
+}
+
+.control-row label{
+  margin-top:0;
+}
+
+small{
+  display:block;
+  color:var(--muted);
+  margin:10px 0 6px;
 }
 
 /* ==========================================================================
