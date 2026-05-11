@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   init3DViewer();
   setupFileDrop();
+  setupKeychainControls();
   switchTab('editor');
 });
 
@@ -208,18 +209,54 @@ async function processSTL() {
 }
 
 // ================= KEYCHAIN =================
+function setupKeychainControls() {
+  const shape = document.getElementById('keyShape');
+  const hole = document.getElementById('keyHoleDiameter');
+  const loopX = document.getElementById('keyLoopX');
+  const loopY = document.getElementById('keyLoopY');
+  if (shape) shape.addEventListener('change', updateKeychainControls);
+  if (hole) hole.addEventListener('input', updateKeychainControls);
+  if (loopX) loopX.addEventListener('input', () => { loopX.dataset.touched = '1'; updateKeychainControls(); });
+  if (loopY) loopY.addEventListener('input', () => { loopY.dataset.touched = '1'; updateKeychainControls(); });
+  updateKeychainControls();
+}
+
+function updateKeychainControls() {
+  const shape = document.getElementById('keyShape')?.value || 'rect';
+  const hole = document.getElementById('keyHoleDiameter');
+  const value = document.getElementById('keyHoleDiameterValue');
+  const heartControls = document.getElementById('heartHoleControls');
+
+  if (value && hole) value.textContent = `${Number(hole.value).toFixed(1).replace('.0', '')} мм`;
+  if (heartControls) heartControls.classList.toggle('hidden', shape !== 'heart');
+
+  if (shape === 'heart') {
+    const loopX = document.getElementById('keyLoopX');
+    const loopY = document.getElementById('keyLoopY');
+    if (loopX && !loopX.dataset.touched) loopX.value = '-7';
+    if (loopY && !loopY.dataset.touched) loopY.value = '4';
+  }
+}
+
 async function generateKeychain() {
   try {
     showStatus('⏳ Генерация...');
+    const shape = document.getElementById('keyShape')?.value || 'rect';
     const payload = {
       text: document.getElementById('keyText')?.value || 'VK',
+      language: document.getElementById('keyLanguage')?.value || 'auto',
       width: parseFloat(document.getElementById('keyWidth')?.value) || 50,
       height: parseFloat(document.getElementById('keyHeight')?.value) || 30,
       thickness: parseFloat(document.getElementById('keyThick')?.value) || 3,
       font_size: parseFloat(document.getElementById('keyFontSize')?.value) || 10,
       text_mode: document.getElementById('keyTextMode')?.value || 'cut',
-      shape: document.getElementById('keyShape')?.value || 'rect'
+      shape,
+      hole_diameter: parseFloat(document.getElementById('keyHoleDiameter')?.value) || 4
     };
+    if (shape === 'heart') {
+      payload.loop_x = parseFloat(document.getElementById('keyLoopX')?.value) || -7;
+      payload.loop_y = parseFloat(document.getElementById('keyLoopY')?.value) || 4;
+    }
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 30000);
     const res = await fetch(`${API_BASE}/generate/keychain-advanced`, {
