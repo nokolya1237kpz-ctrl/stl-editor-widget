@@ -1,0 +1,559 @@
+/* ==========================================================================
+   STL Мастер — стиль интерфейса
+   ========================================================================== */
+
+:root{
+  --bg:#0f1115;
+  --card:#171a21;
+  --card2:#1e232d;
+  --border:#2a3140;
+  --text:#f3f5f7;
+  --muted:#9ba7b4;
+
+  --blue:#4f8cff;
+  --blueHover:#3a7cff;
+
+  --green:#21c36f;
+  --red:#ff5d73;
+  --orange:#ffb84d;
+
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,sans-serif;
+  min-height:100%;
+}
+
+body{
+  padding:20px;
+}
+
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+/* ==========================================================================
+   ШАПКА
+   ========================================================================== */
+
+header{
+  margin-bottom:24px;
+  text-align:center;
+}
+
+.community-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  max-width:100%;
+  margin:0 auto 14px;
+  padding:10px 14px;
+  color:#dce8ff;
+  background:rgba(79,140,255,.12);
+  border:1px solid rgba(79,140,255,.32);
+  border-radius:14px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.25;
+  white-space:normal;
+}
+
+.community-link:hover{
+  background:rgba(79,140,255,.2);
+  transform:translateY(-1px);
+}
+
+h1{
+  font-size:34px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* ==========================================================================
+   КАРТОЧКИ
+   ========================================================================== */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:24px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow);
+}
+
+h2{
+  margin-bottom:16px;
+  font-size:22px;
+}
+
+/* ==========================================================================
+   ПОЛЯ ВВОДА
+   ========================================================================== */
+
+label{
+  display:block;
+  margin-bottom:8px;
+  margin-top:18px;
+  font-weight:600;
+}
+
+input,
+select{
+  width:100%;
+  background:var(--card2);
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:14px;
+  padding:14px;
+  font-size:15px;
+}
+
+input[type="range"]{
+  padding:0;
+  height:34px;
+  accent-color:var(--blue);
+}
+
+input:focus,
+select:focus{
+  outline:none;
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(79,140,255,.18);
+}
+
+/* ==========================================================================
+   КНОПКИ
+   ========================================================================== */
+
+button{
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:16px;
+  margin-top:16px;
+
+  background:var(--blue);
+  color:white;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
+  transition:.18s;
+}
+
+button:hover{
+  background:var(--blueHover);
+  transform:translateY(-1px);
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+button.success{
+  background:var(--green);
+}
+
+button.danger{
+  background:var(--red);
+}
+
+/* ==========================================================================
+   ВКЛАДКИ
+   ========================================================================== */
+
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.tab-btn{
+  background:var(--card);
+  border:1px solid var(--border);
+}
+
+.tab-btn.active{
+  background:var(--blue);
+}
+
+/* ==========================================================================
+   3D ПРОСМОТРЩИК
+   ========================================================================== */
+
+.viewer{
+  width:100%;
+  height:520px;
+
+  background:#0a0c10;
+  border-radius:24px;
+  overflow:hidden;
+
+  border:1px solid var(--border);
+}
+
+/* ==========================================================================
+   СТАТУС / УВЕДОМЛЕНИЯ
+   ========================================================================== */
+
+.status{
+  position:fixed;
+
+  left:50%;
+  bottom:24px;
+
+  transform:translateX(-50%);
+
+  width:min(92%,700px);
+
+  background:#1d2430;
+  border:1px solid var(--border);
+
+  padding:18px 22px;
+  border-radius:18px;
+
+  z-index:999999;
+
+  display:none;
+
+  box-shadow:0 10px 40px rgba(0,0,0,.45);
+}
+
+.status.show{
+  display:block;
+}
+
+.status.error{
+  border-color:#ff5d73;
+  background:#2a1820;
+}
+
+/* ==========================================================================
+   КНОПКА СКАЧИВАНИЯ — отступ от статуса
+   ========================================================================== */
+
+#btnDownload{
+  margin-bottom:90px;
+}
+
+/* ==========================================================================
+   ЗОНА ЗАГРУЗКИ ФАЙЛОВ
+   ========================================================================== */
+
+.file-drop{
+  background:var(--card2);
+  border:2px dashed var(--blue);
+
+  border-radius:22px;
+
+  padding:40px 20px;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  transition:.18s;
+}
+
+.file-drop:hover{
+  border-color:#7aa8ff;
+  background:#222a38;
+}
+
+/* Компактная зона загрузки (для инструментов печати) */
+.file-drop-small{
+  padding:18px 16px;
+  font-size:13px;
+  border-width:1.5px;
+  margin-top:12px;
+}
+
+/* ==========================================================================
+   CAD КОНСТРУКТОР
+   ========================================================================== */
+
+.cad-object-card{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:16px;
+}
+
+.cad-object-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+
+.cad-object-title{
+  font-size:17px;
+  font-weight:700;
+}
+
+/* ==========================================================================
+   СТРОКИ И КОЛОНКИ
+   ========================================================================== */
+
+.row{
+  display:flex;
+  gap:12px;
+}
+
+.row > div{
+  flex:1;
+}
+
+.control-row{
+  margin-top:18px;
+}
+
+.control-row label{
+  margin-top:0;
+}
+
+small{
+  display:block;
+  color:var(--muted);
+  margin:10px 0 6px;
+}
+
+.h3{
+  font-size:18px;
+  margin:20px 0 12px;
+  color:var(--text);
+}
+
+.hint{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+  margin-bottom:14px;
+}
+
+.subcard{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid var(--border);
+}
+
+.row-checks{
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+
+.inline-check{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+  font-weight:600;
+  cursor:pointer;
+  width:auto;
+}
+
+.inline-check input{
+  width:auto;
+  margin:0;
+}
+
+.cad-beginner{
+  margin-bottom:16px;
+}
+
+.btn-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:10px;
+  margin-top:8px;
+}
+
+button.btn-secondary{
+  background:var(--card2);
+  border:1px solid var(--border);
+  color:var(--text);
+  margin-top:10px;
+}
+
+button.btn-secondary:hover{
+  background:#252b38;
+  border-color:var(--blue);
+}
+
+/* Широкая кнопка (для ориентации / размещения на столе) */
+button.btn-wide{
+  width:100%;
+  margin-top:12px;
+}
+
+.file-info{
+  margin-top:10px;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#111722;
+  color:#c8d4e4;
+  font-size:13px;
+}
+
+.analyze-out{
+  margin-top:16px;
+  padding:14px;
+  background:#0a0c10;
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.4;
+  max-height:280px;
+  overflow:auto;
+  white-space:normal;
+  color:#c8d4e4;
+}
+
+.analyze-out h4{
+  margin:0 0 8px;
+  color:var(--text);
+  font-size:14px;
+}
+
+.analyze-out h4:not(:first-child){
+  margin-top:14px;
+}
+
+.analyze-out ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.analyze-out li{
+  margin:4px 0;
+}
+
+.report-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px;
+}
+
+.report-grid div{
+  padding:10px;
+  border:1px solid #263142;
+  border-radius:10px;
+  background:#111722;
+}
+
+.report-grid strong{
+  display:block;
+  color:#ffffff;
+  font-size:15px;
+}
+
+.report-grid span{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.report-list{
+  display:grid;
+  grid-template-columns:minmax(120px, 0.9fr) minmax(0, 1.1fr);
+  gap:7px 12px;
+  margin:0;
+}
+
+.report-list dt{
+  color:var(--muted);
+}
+
+.report-list dd{
+  margin:0;
+  color:#ffffff;
+}
+
+/* ==========================================================================
+   ПРЕВЬЮ
+   ========================================================================== */
+
+.preview-img{
+  width:100%;
+  border-radius:18px;
+  margin-bottom:16px;
+  display:none;
+}
+
+.preview-img.show{
+  display:block;
+}
+
+/* ==========================================================================
+   СКРЫТЫЙ ЭЛЕМЕНТ
+   ========================================================================== */
+
+.hidden{
+  display:none !important;
+}
+
+/* ==========================================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================================================== */
+
+@media(max-width:720px){
+
+  body{
+    padding:14px;
+  }
+
+  .viewer{
+    height:340px;
+  }
+
+  .tabs{
+    flex-direction:column;
+  }
+
+  .row{
+    flex-direction:column;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:20px;
+  }
+
+  .btn-grid{
+    grid-template-columns:1fr;
+  }
+
+  .report-grid,
+  .report-list{
+    grid-template-columns:1fr;
+  }
+}
